@@ -10,7 +10,13 @@ app = Flask(__name__)
 api = Api(app)
 bcrypt = Bcrypt(app)
 
-app.config.from_envvar('ENV_FILE_LOCATION')
+app.config['JWT_SECRET_KEY'] = 'myspace'
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = '12345678'
+app.config['MYSQL_DATABASE_DB'] = 'myspace'
+app.config['MYSQL_DATABASE_Host'] = 'localhost'
+
+# app.config.from_envvar('ENV_FILE_LOCATION')
 # export ENV_FILE_LOCATION=./.env
 
 initialize_db(app)
