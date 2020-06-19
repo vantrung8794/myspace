@@ -16,7 +16,7 @@ app.config['JWT_SECRET_KEY'] = 'myspace'
 app.config['MYSQL_DATABASE_USER'] = 'trungnv'
 app.config['MYSQL_DATABASE_PASSWORD'] = '12345678'
 app.config['MYSQL_DATABASE_DB'] = 'myspace'
-app.config['MYSQL_DATABASE_Host'] = '35.247.162.179'
+app.config['MYSQL_DATABASE_HOST'] = '35.247.162.179'
 
 initialize_db(app)
 initialize_routes(api)
