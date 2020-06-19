@@ -17,7 +17,7 @@ class SignUpAPI(Resource):
         cursor.execute("INSERT INTO users(username, password) VALUES (%s, %s)", (username, bcrypt_pass))
         cursor.connection.commit()
         cursor.close()
-        return "Register " + username + " successfully!", 200
+        return { 'username': username }, 200
 
 class LoginAPI(Resource):
     def post(self):
@@ -36,7 +36,10 @@ class LoginAPI(Resource):
             return {'error': 'Username or Password invalid'}, 401
         expires = datetime.timedelta(days=7)
         access_token = create_access_token(identity=username, expires_delta=expires)
-        return {'token': access_token}, 200
+        return {
+            'username': username,
+            'token': access_token
+            }, 200
 
 class ChangePasswordAPI(Resource):
     @jwt_required
