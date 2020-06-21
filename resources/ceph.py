@@ -30,7 +30,7 @@ bucket = conn.get_bucket("newfiles", validate=False)
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS 
 
 class UploadAPI(Resource):
     @jwt_required
@@ -94,7 +94,7 @@ class GetListBucket(Resource):
             file_item = FileInfo(file_info[0], file_info[1], file_info[2], file_info[3].strftime("%m/%d/%Y, %H:%M:%S"), file_info[4])
             list_items.append(file_item)
         cursor.close()
-        json_data =  json.dumps([i.__dict__ for i in list_items])
+        json_data =  json.dumps({"files": [i.__dict__ for i in list_items]})
         return Response(json_data, mimetype = 'application/json', status=200)
 
 class GetCountData(Resource):
@@ -122,7 +122,7 @@ class GetHistoryData(Resource):
             file_item = FileInfo(file_info[0], file_info[1], file_info[2], file_info[3].strftime("%m/%d/%Y, %H:%M:%S"), file_info[4])
             list_items.append(file_item)
         cursor.close()
-        json_data =  json.dumps([i.__dict__ for i in list_items])
+        json_data =  json.dumps({"files": [i.__dict__ for i in list_items]})
         return Response(json_data, mimetype = 'application/json', status=200)
 
 
@@ -138,7 +138,7 @@ class GetListBucketFromS3(Resource):
                     "url": key.generate_url(expires_in=0, query_auth=False, force_http=False) 
                 }
                 list_item.append(item)
-        res = {"items": list_item}
+        res = {"files": list_item}
         return Response(json.dumps(res), mimetype = 'application/json', status=200)
 
 class GetURLForFile(Resource):
