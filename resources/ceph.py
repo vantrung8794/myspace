@@ -31,20 +31,19 @@ def allowed_file(filename):
 
 class UploadAPI(Resource):
     def post(self):
-        my_url = ""
-        if 'file' not in request.files:
-            return {"error": "Không tìm thấy file"}, 400
-        file = request.files['file']
-        if file.filename == '':
-            return {"error": "Không tìm thấy file"}, 400
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            k = Key(bucket)
-            k.key=filename
-            k.set_contents_from_file(file)
-            k.set_acl('public-read')
-            my_url = k.generate_url(expires_in=0, query_auth=False, force_http=False) 
-        return {"url": my_url}, 200
+        my_urls = []
+        files = request.files.getlist("file")
+        print(files)
+        for file in files:
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                k = Key(bucket)
+                k.key=filename
+                k.set_contents_from_file(file)
+                k.set_acl('public-read')
+                my_url = k.generate_url(expires_in=0, query_auth=False, force_http=False) 
+                my_urls.append({"name": file.filename ,"url": my_url})
+        return Response(json.dumps(my_urls), mimetype = 'application/json', status=200)
 
 class DeleteContentAPI(Resource):
     def delete(self, filename):
