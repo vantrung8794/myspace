@@ -16,7 +16,7 @@ from commons.decima import CustomJSONEncoder
 
 access_key = 'DGZ3M9S7TC2MW9M37AK4'
 secret_key = '3thIb8rhcmSF79mMCPbqM9MGvGlJt3Ilqu3BsjfB'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp3'}
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp3', ''}
 
 conn = boto.connect_s3(
         aws_access_key_id = access_key,
@@ -38,9 +38,11 @@ class UploadAPI(Resource):
         username = get_jwt_identity()
         my_urls = []
         files = request.files.getlist("file")
+        print(files)
         for file in files:
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
+                print(filename)
                 k = Key(bucket)
                 k.key=filename
                 k.set_contents_from_file(file)
@@ -57,7 +59,7 @@ class UploadAPI(Resource):
                 cursor.connection.commit()
                 cursor.close()
                 my_urls.append({"name": filename ,"url": my_url})
-        return {"status": "200"}, 200
+        return {"status": "200"} , 200
 
 class DeleteContentAPI(Resource):
     @jwt_required
