@@ -34,7 +34,7 @@ class LoginAPI(Resource):
         authenized = check_password(crypt_pass[0], password)
         if not authenized:
             return {'error': 'Username or Password invalid'}, 401
-        expires = datetime.timedelta(days=7)
+        expires = datetime.timedelta(days=100)
         access_token = create_access_token(identity=username, expires_delta=expires)
         return {
             'username': username,

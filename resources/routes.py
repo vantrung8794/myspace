@@ -1,6 +1,6 @@
 from .user import UsersAPI
 from .auth import SignUpAPI, LoginAPI, ChangePasswordAPI
-from .ceph import UploadAPI, CreateBucketAPI, GetListBucket, DeleteContentAPI, GetURLForFile
+from .ceph import UploadAPI, CreateBucketAPI, GetListBucket, DeleteContentAPI, GetURLForFile, GetCountData, GetHistoryData
 
 def initialize_routes(api):
     api.add_resource(UsersAPI, '/users')
@@ -12,3 +12,5 @@ def initialize_routes(api):
     api.add_resource(CreateBucketAPI, '/createbucket')
     api.add_resource(GetListBucket, '/getlistbucket')
     api.add_resource(GetURLForFile, '/geturlforfile/<filename>')
+    api.add_resource(GetCountData, '/getcountdata')
+    api.add_resource(GetHistoryData, '/gethistory')
