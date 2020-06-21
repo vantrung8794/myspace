@@ -57,7 +57,7 @@ class UploadAPI(Resource):
                 cursor.connection.commit()
                 cursor.close()
                 my_urls.append({"name": filename ,"url": my_url})
-        return Response(json.dumps(my_urls), mimetype = 'application/json', status=200)
+        return {"status": "200"}, 200
 
 class DeleteContentAPI(Resource):
     @jwt_required
