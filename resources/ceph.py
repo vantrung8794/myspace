@@ -59,19 +59,19 @@ class UploadAPI(Resource):
                 cursor.connection.commit()
                 cursor.close()
                 my_urls.append({"name": filename ,"url": my_url})
-        return {"status": "200"} , 200
+        return {"status": 200} , 200
 
 class DeleteContentAPI(Resource):
     @jwt_required
     def delete(self, filename):
         user_name = get_jwt_identity()
+        bucket.delete_key(filename)
         mysql_conn = mysql.connect()
         cursor = mysql_conn.cursor()
         cursor.execute("DELETE FROM files WHERE user_name = '%s' and file_name = '%s'" % (user_name,filename))
         cursor.connection.commit()
         cursor.close()
-        bucket.delete_key(filename)
-        return "delete %s successfully!" % filename, 200
+        return {"status": 200} , 200
 
 class CreateBucketAPI(Resource):
     @jwt_required
