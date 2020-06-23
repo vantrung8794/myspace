@@ -16,7 +16,7 @@ from commons.decima import CustomJSONEncoder
 
 access_key = 'DGZ3M9S7TC2MW9M37AK4'
 secret_key = '3thIb8rhcmSF79mMCPbqM9MGvGlJt3Ilqu3BsjfB'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp3', ''}
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp3', '', 'docx', 'doc', 'zip'}
 
 conn = boto.connect_s3(
         aws_access_key_id = access_key,

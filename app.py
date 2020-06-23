@@ -13,10 +13,10 @@ bcrypt = Bcrypt(app)
 # app.config.from_envvar('ENV_FILE_LOCATION')
 # export ENV_FILE_LOCATION=./.env
 app.config['JWT_SECRET_KEY'] = 'myspace'
-app.config['MYSQL_DATABASE_USER'] = 'trungnv'
+app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = '12345678'
 app.config['MYSQL_DATABASE_DB'] = 'myspace'
-app.config['MYSQL_DATABASE_HOST'] = '35.247.162.179'
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 
 initialize_db(app)
 initialize_routes(api)
