@@ -88,7 +88,7 @@ class GetListBucket(Resource):
         user_name = get_jwt_identity()
         mysql_conn = mysql.connect()
         cursor = mysql_conn.cursor()
-        cursor.execute("SELECT file_name, file_size, file_url, created_date, user_name FROM files WHERE user_name = '%s'" % (user_name))
+        cursor.execute("SELECT file_name, file_size, file_url, created_date, user_name FROM files WHERE user_name = '%s' ORDER BY created_date DESC " % (user_name))
         cursor.connection.commit()
         list_files = cursor.fetchall()
         list_items = []
@@ -116,7 +116,7 @@ class GetHistoryData(Resource):
         user_name = get_jwt_identity()
         mysql_conn = mysql.connect()
         cursor = mysql_conn.cursor()
-        cursor.execute("SELECT file_name, file_size, file_url, created_date, user_name FROM files WHERE user_name = '%s' ORDER BY created_date DESC LIMIT 5" % (user_name))
+        cursor.execute("SELECT file_name, file_size, file_url, created_date, user_name FROM files WHERE user_name = '%s' ORDER BY created_date DESC LIMIT 50" % (user_name))
         cursor.connection.commit()
         list_files = cursor.fetchall()
         list_items = []

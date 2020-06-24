@@ -1,9 +1,9 @@
-from .user import UsersAPI
+from .user import GetUserInfoAPI
 from .auth import SignUpAPI, LoginAPI, ChangePasswordAPI
 from .ceph import UploadAPI, CreateBucketAPI, GetListBucket, DeleteContentAPI, GetURLForFile, GetCountData, GetHistoryData
 
 def initialize_routes(api):
-    api.add_resource(UsersAPI, '/users')
+    api.add_resource(GetUserInfoAPI, '/getuserinfo')
     api.add_resource(SignUpAPI,'/signup')
     api.add_resource(LoginAPI,'/login')
     api.add_resource(ChangePasswordAPI,'/changepassword')

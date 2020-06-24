@@ -1,9 +1,14 @@
 
 
 class User():
-    def __init__(self, username, password):
+    def __init__(self, username, avatar_url, full_name, package_id, package_name, package_cost, package_data):
         self.username = username
-        self.password = password
+        self.avatar_url = avatar_url
+        self.full_name = full_name
+        self.package_id = package_id
+        self.package_name = package_name
+        self.package_cost = package_cost
+        self.package_data = package_data
 
 class FileInfo():
     def __init__(self, file_name, file_size, file_url, created_date, user_name):
